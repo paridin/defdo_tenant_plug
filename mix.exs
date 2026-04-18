@@ -1,4 +1,4 @@
-defmodule DefdoTenantPlug.MixProject do
+defmodule Defdo.TenantPlug.MixProject do
   @moduledoc false
   use Mix.Project
 

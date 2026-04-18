@@ -1,9 +1,9 @@
-defmodule DefdoTenantPlug.Adapter.Host do
+defmodule Defdo.TenantPlug.Adapter.Host do
   @moduledoc """
   Resolves a tenant from the incoming host using `Defdo.Tenant`.
   """
 
-  @behaviour DefdoTenantPlug.Adapter
+  @behaviour Defdo.TenantPlug.Adapter
 
   @impl true
   def init(opts), do: opts

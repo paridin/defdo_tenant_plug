@@ -1,5 +1,5 @@
 if Code.ensure_loaded?(Phoenix.Component) do
-  defmodule DefdoTenantPlug.LiveView do
+  defmodule Defdo.TenantPlug.LiveView do
     @moduledoc """
     LiveView helpers for restoring a tenant from session.
     """
@@ -27,7 +27,7 @@ if Code.ensure_loaded?(Phoenix.Component) do
 
       case Map.get(session, session_key) do
         tenant_id when is_binary(tenant_id) and tenant_id != "" ->
-          tenant_module = DefdoTenantPlug.Config.tenant_module(opts)
+          tenant_module = Defdo.TenantPlug.Config.tenant_module(opts)
           tenant = tenant_module.get_profile!(tenant_id)
 
           tenant_module.inject_tenant(tenant_id)
@@ -49,12 +49,12 @@ if Code.ensure_loaded?(Phoenix.Component) do
     defp normalize_opts(_other), do: []
   end
 else
-  defmodule DefdoTenantPlug.LiveView do
+  defmodule Defdo.TenantPlug.LiveView do
     @moduledoc false
 
     def on_mount(_config, _params, _session, _socket) do
       raise ArgumentError,
-            "DefdoTenantPlug.LiveView requires :phoenix_live_view to be available"
+            "Defdo.TenantPlug.LiveView requires :phoenix_live_view to be available"
     end
   end
 end

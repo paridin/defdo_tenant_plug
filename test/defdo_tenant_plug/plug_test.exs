@@ -1,4 +1,4 @@
-defmodule DefdoTenantPlug.PlugTest do
+defmodule Defdo.TenantPlug.PlugTest do
   use ExUnit.Case, async: true
 
   import Plug.Conn
@@ -9,7 +9,7 @@ defmodule DefdoTenantPlug.PlugTest do
   end
 
   defmodule AdapterStub do
-    @behaviour DefdoTenantPlug.Adapter
+    @behaviour Defdo.TenantPlug.Adapter
 
     @impl true
     def init(opts), do: opts
@@ -30,16 +30,16 @@ defmodule DefdoTenantPlug.PlugTest do
       :get
       |> conn("/")
       |> init_test_session(%{})
-      |> DefdoTenantPlug.Plug.call(
-        DefdoTenantPlug.Plug.init(
+      |> Defdo.TenantPlug.Plug.call(
+        Defdo.TenantPlug.Plug.init(
           adapter: AdapterStub,
           adapter_opts: [tenant: tenant],
           tenant_module: TenantStub
         )
       )
 
-    assert DefdoTenantPlug.tenant(conn) == tenant
-    assert DefdoTenantPlug.tenant_id(conn) == "tenant-1"
+    assert Defdo.TenantPlug.tenant(conn) == tenant
+    assert Defdo.TenantPlug.tenant_id(conn) == "tenant-1"
     assert conn.assigns.tenant_id == "tenant-1"
     assert is_nil(conn.assigns[:tenant])
   end
@@ -51,8 +51,8 @@ defmodule DefdoTenantPlug.PlugTest do
       :get
       |> conn("/")
       |> init_test_session(%{})
-      |> DefdoTenantPlug.Plug.call(
-        DefdoTenantPlug.Plug.init(
+      |> Defdo.TenantPlug.Plug.call(
+        Defdo.TenantPlug.Plug.init(
           adapter: AdapterStub,
           adapter_opts: [tenant: tenant],
           tenant_module: TenantStub,
@@ -70,8 +70,8 @@ defmodule DefdoTenantPlug.PlugTest do
       :get
       |> conn("/")
       |> init_test_session(%{})
-      |> DefdoTenantPlug.Plug.call(
-        DefdoTenantPlug.Plug.init(
+      |> Defdo.TenantPlug.Plug.call(
+        Defdo.TenantPlug.Plug.init(
           adapter: AdapterStub,
           adapter_opts: [tenant: tenant],
           tenant_module: TenantStub,
@@ -86,8 +86,8 @@ defmodule DefdoTenantPlug.PlugTest do
     conn =
       :get
       |> conn("/")
-      |> DefdoTenantPlug.Plug.call(
-        DefdoTenantPlug.Plug.init(
+      |> Defdo.TenantPlug.Plug.call(
+        Defdo.TenantPlug.Plug.init(
           adapter: AdapterStub,
           adapter_opts: [],
           tenant_module: TenantStub,
@@ -102,8 +102,8 @@ defmodule DefdoTenantPlug.PlugTest do
     assert_raise RuntimeError, ~r/tenant is configured for your domain/, fn ->
       :get
       |> conn("/")
-      |> DefdoTenantPlug.Plug.call(
-        DefdoTenantPlug.Plug.init(
+      |> Defdo.TenantPlug.Plug.call(
+        Defdo.TenantPlug.Plug.init(
           adapter: AdapterStub,
           adapter_opts: [],
           tenant_module: TenantStub

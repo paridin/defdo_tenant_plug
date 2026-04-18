@@ -1,4 +1,4 @@
-defmodule DefdoTenantPlug.Config do
+defmodule Defdo.TenantPlug.Config do
   @moduledoc false
 
   def tenant_module(opts), do: Keyword.get(opts, :tenant_module, Defdo.Tenant)

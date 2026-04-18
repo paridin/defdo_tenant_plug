@@ -1,4 +1,4 @@
-defmodule DefdoTenantPlug.Adapter do
+defmodule Defdo.TenantPlug.Adapter do
   @moduledoc """
   Behaviour for request tenant resolution.
   """

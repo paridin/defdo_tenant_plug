@@ -1,4 +1,4 @@
-defmodule DefdoTenantPlug do
+defmodule Defdo.TenantPlug do
   @moduledoc """
   Standard tenant resolution and injection flow for Defdo hosts.
 

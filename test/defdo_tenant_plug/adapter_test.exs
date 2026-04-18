@@ -1,4 +1,4 @@
-defmodule DefdoTenantPlug.AdapterTest do
+defmodule Defdo.TenantPlug.AdapterTest do
   use ExUnit.Case, async: true
 
   import Plug.Conn
@@ -20,7 +20,7 @@ defmodule DefdoTenantPlug.AdapterTest do
       |> put_req_header("x-tenant-id", "tenant-header")
 
     assert {:ok, %{tenant_id: "tenant-header"}} =
-             DefdoTenantPlug.Adapter.Header.tenant_from_conn(
+             Defdo.TenantPlug.Adapter.Header.tenant_from_conn(
                conn,
                header: "x-tenant-id",
                tenant_module: TenantStub
@@ -31,7 +31,7 @@ defmodule DefdoTenantPlug.AdapterTest do
     conn = conn(:get, "/")
 
     assert :error =
-             DefdoTenantPlug.Adapter.Header.tenant_from_conn(
+             Defdo.TenantPlug.Adapter.Header.tenant_from_conn(
                conn,
                header: "x-tenant-id",
                tenant_module: TenantStub
@@ -45,7 +45,7 @@ defmodule DefdoTenantPlug.AdapterTest do
       |> init_test_session(%{"tenant_id" => "tenant-session"})
 
     assert {:ok, %{tenant_id: "tenant-session"}} =
-             DefdoTenantPlug.Adapter.Session.tenant_from_conn(
+             Defdo.TenantPlug.Adapter.Session.tenant_from_conn(
                conn,
                tenant_module: TenantStub
              )
@@ -58,7 +58,7 @@ defmodule DefdoTenantPlug.AdapterTest do
       |> init_test_session(%{})
 
     assert :error =
-             DefdoTenantPlug.Adapter.Session.tenant_from_conn(
+             Defdo.TenantPlug.Adapter.Session.tenant_from_conn(
                conn,
                tenant_module: TenantStub
              )

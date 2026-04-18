@@ -1,4 +1,4 @@
-defmodule DefdoTenantPlug.Adapter.Header do
+defmodule Defdo.TenantPlug.Adapter.Header do
   @moduledoc """
   Resolves a tenant from a request header.
 
@@ -6,7 +6,7 @@ defmodule DefdoTenantPlug.Adapter.Header do
   `Defdo.Tenant.get_profile_by/1 |> one(skip_tenant_id: true)`.
   """
 
-  @behaviour DefdoTenantPlug.Adapter
+  @behaviour Defdo.TenantPlug.Adapter
 
   import Plug.Conn, only: [get_req_header: 2]
 

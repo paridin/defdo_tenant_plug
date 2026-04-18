@@ -1,4 +1,4 @@
-defmodule DefdoTenantPlug.Adapter.Session do
+defmodule Defdo.TenantPlug.Adapter.Session do
   @moduledoc """
   Resolves a tenant from session state.
 
@@ -6,7 +6,7 @@ defmodule DefdoTenantPlug.Adapter.Session do
   `Defdo.Tenant.get_profile!/1`.
   """
 
-  @behaviour DefdoTenantPlug.Adapter
+  @behaviour Defdo.TenantPlug.Adapter
 
   import Plug.Conn, only: [get_session: 2]
 

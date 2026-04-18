@@ -1,6 +1,6 @@
-# DefdoTenantPlug
+# Defdo.TenantPlug
 
-`DefdoTenantPlug` standardizes tenant resolution and injection across Defdo host apps.
+`Defdo.TenantPlug` standardizes tenant resolution and injection across Defdo host apps.
 
 It provides:
 
@@ -27,8 +27,8 @@ end
 
 ```elixir
 pipeline :json_api do
-  plug DefdoTenantPlug.Plug,
-    adapter: DefdoTenantPlug.Adapter.Host,
+  plug Defdo.TenantPlug.Plug,
+    adapter: Defdo.TenantPlug.Adapter.Host,
     ash: true,
     absinthe: true,
     assign: :tenant,
@@ -37,13 +37,13 @@ end
 ```
 
 If you want to avoid the Ash deprecation around `assigns.tenant`, skip `assign: :tenant`
-and read the full tenant through `DefdoTenantPlug.tenant(conn)` instead.
+and read the full tenant through `Defdo.TenantPlug.tenant(conn)` instead.
 
 ## Header adapter
 
 ```elixir
-plug DefdoTenantPlug.Plug,
-  adapter: DefdoTenantPlug.Adapter.Header,
+plug Defdo.TenantPlug.Plug,
+  adapter: Defdo.TenantPlug.Adapter.Header,
   adapter_opts: [header: "x-tenant-id"],
   ash: true
 ```
@@ -51,8 +51,8 @@ plug DefdoTenantPlug.Plug,
 ## Session adapter
 
 ```elixir
-plug DefdoTenantPlug.Plug,
-  adapter: DefdoTenantPlug.Adapter.Session,
+plug Defdo.TenantPlug.Plug,
+  adapter: Defdo.TenantPlug.Adapter.Session,
   put_session: true
 ```
 
@@ -60,7 +60,7 @@ plug DefdoTenantPlug.Plug,
 
 ```elixir
 live_session :admin,
-  on_mount: [{DefdoTenantPlug.LiveView, {:default, assign_key: :tenant}}] do
+  on_mount: [{Defdo.TenantPlug.LiveView, {:default, assign_key: :tenant}}] do
   # routes
 end
 ```
@@ -76,10 +76,10 @@ Adapters implement:
 
 ## Initial migration plan
 
-1. Replace host-local tenant plugs with `DefdoTenantPlug.Plug`
+1. Replace host-local tenant plugs with `Defdo.TenantPlug.Plug`
 2. Keep existing router order
 3. Move Ash integration into package config instead of host-local code
-4. Standardize LiveView tenant restoration through `DefdoTenantPlug.LiveView`
+4. Standardize LiveView tenant restoration through `Defdo.TenantPlug.LiveView`
 
 ## Publish check
 

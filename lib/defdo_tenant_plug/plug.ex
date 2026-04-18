@@ -1,10 +1,10 @@
-defmodule DefdoTenantPlug.Plug do
+defmodule Defdo.TenantPlug.Plug do
   @moduledoc """
   Resolves and injects tenant state into the request lifecycle.
 
   Options:
 
-    * `:adapter` - adapter module, defaults to `DefdoTenantPlug.Adapter.Host`
+    * `:adapter` - adapter module, defaults to `Defdo.TenantPlug.Adapter.Host`
     * `:adapter_opts` - options forwarded to the adapter
     * `:tenant_module` - tenant module used for `inject_tenant/1`, defaults to `Defdo.Tenant`
     * `:tenant_id_field` - tenant id field in the tenant struct, defaults to `:tenant_id`
@@ -20,11 +20,11 @@ defmodule DefdoTenantPlug.Plug do
 
   import Plug.Conn, only: [assign: 3, halt: 1, put_session: 3]
 
-  alias DefdoTenantPlug.Config
+  alias Defdo.TenantPlug.Config
 
   @impl true
   def init(opts) do
-    adapter = Keyword.get(opts, :adapter, DefdoTenantPlug.Adapter.Host)
+    adapter = Keyword.get(opts, :adapter, Defdo.TenantPlug.Adapter.Host)
     adapter_opts = adapter.init(Keyword.get(opts, :adapter_opts, []))
 
     opts
@@ -42,7 +42,7 @@ defmodule DefdoTenantPlug.Plug do
         tenant_module.inject_tenant(tenant_id)
 
         conn
-        |> DefdoTenantPlug.put(tenant, tenant_id)
+        |> Defdo.TenantPlug.put(tenant, tenant_id)
         |> maybe_assign_tenant(tenant, opts)
         |> maybe_assign_tenant_id(tenant_id, opts)
         |> maybe_put_session(tenant_id, opts)
